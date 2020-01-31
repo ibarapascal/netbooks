@@ -6,6 +6,8 @@ import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { InputAction } from '../types/BaseTypes';
 import { Storage } from '../types/Storage';
+import { data } from '../data'
+import { BookInfoRes } from '../types/api/GetBookInfo';
 
 const divStyle = {
   color: 'blue',
@@ -32,6 +34,10 @@ interface Props {
    * action: save storage
    */
   saveStorage: (payload: InputAction) => void,
+  /**
+   * action: save static data to redux storage
+   */
+  saveBookInfo: (payload: BookInfoRes) => void,
 }
 
 interface State {
@@ -46,6 +52,7 @@ export const Home: React.FC<Props> = connect(
   }),
   (dispatch: any) => ({
     saveStorage: (payload: InputAction) => dispatch({type: 'saveStorageItem', payload}),
+    saveBookInfo: (payload: BookInfoRes) => dispatch({type: 'saveBookInfo', payload}),
   })
 )(class extends React.Component<Props, State>{
   constructor(props: Props) {
@@ -57,7 +64,9 @@ export const Home: React.FC<Props> = connect(
   };
 
   async componentDidMount() {
+    await this.props.saveBookInfo(data.filter(x => x.isbn));
   }
+
 
   render() {
     return <this._render />

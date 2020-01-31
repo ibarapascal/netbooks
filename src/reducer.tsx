@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import { Storage } from './types/Storage';
+import { BookInfoRes } from './types/api/GetBookInfo';
+import { Store } from './store';
 
-const StorageReducer = createReducer<Storage>(
+const StorageReducer = createReducer<Store['storage']>(
   new Storage(),
   {
     saveStorageItem(state: Storage, action: any) {
@@ -14,6 +16,16 @@ const StorageReducer = createReducer<Storage>(
   }
 );
 
+const BookInfoReducer = createReducer<Store['bookInfo']>(
+  new BookInfoRes(),
+  {
+    saveBookInfo(state: any, action: any) {
+      return state = action.payload;
+    },
+  }
+);
+
 export const reducer = combineReducers({
-  Storage: StorageReducer,
+  storage: StorageReducer,
+  bookInfo: BookInfoReducer,
 });
