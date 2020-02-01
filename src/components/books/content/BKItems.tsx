@@ -24,10 +24,11 @@ import {
 import { InputAction } from '../../../types/BaseTypes';
 import { LocalStorage } from '../../../types/LocalStorage';
 import { BookInfoRes, BookUnit } from '../../../types/api/GetBookInfo';
-import { BKConstant as CONST, FilterType } from '../common/BKConstant';
 import { ProcessService } from '../../../services/ProcessService';
 import AddIcon from '@material-ui/icons/Add';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import { BKConstant as CONST } from '../common/BKConstant';
+import { BKService as Service } from '../common/BKService';
 
 const styles = (theme: Theme) => createStyles({
   root: {
@@ -96,46 +97,11 @@ export const BKItems = withStyles(styles)(connect(
     console.log(isbn);
   }
 
-  checkIfMatch(value: string | Array<string> | unknown, input: string, type: FilterType): boolean {
-    if (input === '') {
-      return true;
-    } else {
-      switch(type) {
-        case 'Normal':
-          return JSON.stringify(value).toUpperCase().includes(input.toUpperCase());
-        case 'Exact':
-          return typeof value === 'string'
-            ? value.toUpperCase() === input.toUpperCase()
-            : value instanceof Array
-            ? value.some(x => x.toUpperCase() === input.toUpperCase())
-            : false;
-        case 'Start': 
-          return typeof value === 'string'
-            ? value.startsWith(input)
-            : value instanceof Array
-            ? value.some(x => x.startsWith(input))
-            : false;
-        default:
-          return false;
-      }
-    }
-  }
-
-  acquireDisplayBooks(): Array<BookUnit> {
-    const { bookInfo, localStorage } = this.props;
-    const { pageSize, filterInput } = this.props.localStorage;
-    const filterOption = localStorage.filterOption ?? 'title';
-    const filterType = localStorage.filterType ?? 'Normal';
-    return bookInfo.filter(x =>
-        this.checkIfMatch(x[filterOption], filterInput, filterType)
-      ).slice(0, pageSize);
-  }
-
   render() {
     const { classes } = this.props;
-    const { displayMode } = this.props.localStorage;
+    const { pageSize, displayMode } = this.props.localStorage;
 
-    const displayBook = this.acquireDisplayBooks();
+    const displayBook = Service.acquireFinalBooks(this.props).slice(0, pageSize);;
     
     if (displayMode !== 'List') {
       return (
