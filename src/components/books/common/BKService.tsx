@@ -37,11 +37,9 @@ export class BKService {
    * 
    * @param props 
    */
-  static acquireDisplayBooks(props: DisplayProps): Array<BookUnit> {
-    const { localStorage } = props;
-    const filterOption = localStorage.filterOption ?? 'title';
-    const filterType = localStorage.filterType ?? 'Normal';
-    return props.bookInfo.filter(x => this.checkIfMatch(x[filterOption], localStorage.filterInput, filterType));
+  static acquireRawBooks(props: DisplayProps): Array<BookUnit> {
+    const { filterInput, filterOption, filterType } = props.localStorage;
+    return props.bookInfo.filter(x => this.checkIfMatch(x[filterOption], filterInput, filterType));
   }
   /**
    * 
@@ -49,7 +47,7 @@ export class BKService {
    */
   static acquireFinalBooks(props: DisplayProps): Array<BookUnit> {
     const { tagList } = props.localStorage;
-    return BKService.acquireDisplayBooks(props).filter(x => tagList.length === 0 || x?.categories.some(y => tagList.includes(y)));
+    return BKService.acquireRawBooks(props).filter(x => tagList.length === 0 || x?.categories.some(y => tagList.includes(y)));
   }
 }
 

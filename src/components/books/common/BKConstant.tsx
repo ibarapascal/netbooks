@@ -9,9 +9,9 @@ export class BKConstant {
   ] as const;
 
   static readonly OPTION_MODE_MAP = [
-    {id: '1', attr: 'Normal', value: 'Normal match'},
-    {id: '2', attr: 'Start', value: 'Start with'},
-    {id: '3', attr: 'Exact', value: 'Exact match'}
+    {id: '1', attr: 'Normal', value: 'Normal Match'},
+    {id: '2', attr: 'Exact', value: 'Exact Match'},
+    {id: '3', attr: 'Start', value: 'Start With'}
   ] as const;
 
   static readonly DATA_MAP = [

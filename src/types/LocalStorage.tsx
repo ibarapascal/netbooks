@@ -5,8 +5,8 @@ export class LocalStorage {
    * Condition
    */
   filterInput: string;
-  filterOption: FilterAttr | null;
-  filterType: FilterType | null;
+  filterOption: FilterAttr;
+  filterType: FilterType;
   /**
    * Option
    */
@@ -19,8 +19,8 @@ export class LocalStorage {
   selectedIdList: Array<string>;
   constructor() {
     this.filterInput = '';
-    this.filterOption = null;
-    this.filterType = null;
+    this.filterOption = 'title';
+    this.filterType = 'Normal';
     this.pageSize = 30;
     this.displayMode = 'BigCard';
     this.tagList = Array<string>();

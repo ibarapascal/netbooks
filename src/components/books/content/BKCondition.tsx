@@ -67,7 +67,7 @@ export const BKCondition = withStyles(styles)(connect(
   acquireCategoryList(): Array<TagUnit> {
     let list: Array<TagUnit> = [];
     // For display each book's each categories
-    Service.acquireDisplayBooks(this.props).forEach(x => x?.categories.forEach(y => !list.some(z => z.name === y)
+    Service.acquireRawBooks(this.props).forEach(x => x?.categories.forEach(y => !list.some(z => z.name === y)
     // If not exist, init
       ? list.push({name: y, amount: 1, isbn: x.isbn ?? ''})
     // If exist, add amount 1
