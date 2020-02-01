@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Store } from '../../store';
-import { withStyles, createStyles, WithStyles, Select } from '@material-ui/core';
+import { withStyles, createStyles, WithStyles } from '@material-ui/core';
+import Select from 'react-select';
 
 const styles = () => createStyles({
   root: {
