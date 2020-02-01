@@ -4,7 +4,7 @@ import { Store } from "../../../store";
 
 export class BKService {
   /**
-   * 
+   * Check the value got by filter option whether match the filter condition
    * @param value 
    * @param input 
    * @param type 
@@ -34,7 +34,7 @@ export class BKService {
     }
   }
   /**
-   * 
+   * Get the books after filter
    * @param props 
    */
   static acquireRawBooks(props: DisplayProps): Array<BookUnit> {
@@ -42,7 +42,7 @@ export class BKService {
     return props.bookInfo.filter(x => this.checkIfMatch(x[filterOption], filterInput, filterType));
   }
   /**
-   * 
+   * Get the books after filter and tags selection
    * @param props 
    */
   static acquireFinalBooks(props: DisplayProps): Array<BookUnit> {

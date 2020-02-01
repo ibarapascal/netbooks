@@ -1,13 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Store } from '../../store';
-import { withStyles, createStyles, WithStyles } from '@material-ui/core';
 import Select from 'react-select';
-
-const styles = () => createStyles({
-  root: {
-  }
-});
+// import { makeStyles } from '@material-ui/core/styles';
+// const useStyles = makeStyles(theme => ({
+//   root: {
+//   },
+// }));
 
 export class CMSelectionUnit {
   label: string;
@@ -18,12 +17,26 @@ export class CMSelectionUnit {
   }
 }
 
-interface Props extends WithStyles<typeof styles> {
-  classes: any,
+interface Props {
+  /**
+   * I/O element id
+   */
   id?: string,
+  /**
+   * selected data
+   */
   value: CMSelectionUnit | undefined,
+  /**
+   * selectable data
+   */
   dataList: Array<CMSelectionUnit>,
+  /**
+   * select event
+   */
   onChange: Function,
+  /**
+   * other native props of react-select
+   */
   customProps?: any,
 }
 
@@ -31,9 +44,9 @@ interface State {
 }
 
 /**
- * Write the description of this component here
+ * Common selection component based on react-select
  */
-export const CMSelection = withStyles(styles)(connect(
+export const CMSelection: React.FC<Props> = connect(
   (store: Store) => ({
   }),
   (dispatch: any) => ({
@@ -45,10 +58,13 @@ export const CMSelection = withStyles(styles)(connect(
     };
   }
   static defaultProps = {
-    classes: {},
   };
 
   render() {
+    return <this.functionalRender />
+  }
+  functionalRender: React.FC = () => {
+    // const classes = useStyles();
     const {
       id,
       value,
@@ -88,4 +104,4 @@ export const CMSelection = withStyles(styles)(connect(
       </>
     )
   }
-}));
+});

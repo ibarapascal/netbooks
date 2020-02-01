@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Store } from '../../store';
-import { withStyles, createStyles, WithStyles } from '@material-ui/core';
 import { CMGrid } from '../common/CMGrid';
 import { BookInfoRes } from '../../types/api/GetBookInfo';
 import { data } from '../../data'
@@ -10,13 +9,16 @@ import { BKCondition } from './content/BKCondition';
 import { BKOption } from './content/BKOption';
 import { BKItems } from './content/BKItems';
 
-const styles = () => createStyles({
-  root: {
-  }
-});
+// import { makeStyles } from '@material-ui/core/styles';
+// const useStyles = makeStyles(theme => ({
+//   root: {
+//   }
+// }));
 
-interface Props extends WithStyles<typeof styles> {
-  classes: any,
+interface Props {
+  /**
+   * redux action: save books data to bookInfo
+   */
   saveBookInfo: (payload: BookInfoRes) => void,
 }
 
@@ -24,9 +26,9 @@ interface State {
 }
 
 /**
- * Write the description of this component here
+ * Book main page
  */
-export const BK = withStyles(styles)(connect(
+export const BK: React.FC<Props> = connect(
   (store: Store) => ({
   }),
   (dispatch: any) => ({
@@ -39,7 +41,6 @@ export const BK = withStyles(styles)(connect(
     };
   }
   static defaultProps = {
-    classes: {},
   };
 
   async componentDidMount() {
@@ -52,6 +53,10 @@ export const BK = withStyles(styles)(connect(
   }
 
   render() {
+    return <this.functionalRender />
+  }
+  functionalRender: React.FC = () => {
+    // const classes = useStyles();
     return (
       <CMGrid>
         <Grid container spacing={4}>
@@ -68,4 +73,4 @@ export const BK = withStyles(styles)(connect(
       </CMGrid>
     )
   }
-}));
+});

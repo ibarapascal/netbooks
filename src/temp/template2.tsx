@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Store } from '../../store';
-import { InputAction } from '../../types/BaseTypes';
-import { LocalStorage } from '../../types/LocalStorage';
+import { Store } from '../store';
+import { InputAction } from '../types/BaseTypes';
+import { LocalStorage } from '../types/LocalStorage';
 // import { makeStyles } from '@material-ui/core/styles';
 // const useStyles = makeStyles(theme => ({
 //   root: {
@@ -26,7 +26,7 @@ interface State {
 /**
  * Component description
  */
-export const TD: React.FC<Props> = connect(
+export const YourComponentName: React.FC<Props> = connect(
   (store: Store) => ({
     localStorage: store.localStorage,
   }),

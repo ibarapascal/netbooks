@@ -4,7 +4,6 @@ import ViewCompactIcon from '@material-ui/icons/ViewCompact';
 import ViewComfyIcon from '@material-ui/icons/ViewComfy';
 import ViewHeadlineIcon from '@material-ui/icons/ViewHeadline';
 
-
 export class BKConstant {
 
   static readonly DISPLAY_MODE_MAP = [

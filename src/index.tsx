@@ -9,6 +9,10 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { BK } from './components/books/BK';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core';
+
+const theme = createMuiTheme({
+});
 
 const preloadStore = {
 };
@@ -23,12 +27,14 @@ const store = createStore(
 
 ReactDOM.render(
 <Provider store={store}>
-  <BrowserRouter>
-    <Switch>
-      <Route exact path="/" component={BK} />
-      <Redirect to="/" />
-    </Switch>
-  </BrowserRouter>
+  <ThemeProvider theme={theme}>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={BK} />
+        <Redirect to="/" />
+      </Switch>
+    </BrowserRouter>
+    </ThemeProvider>
 </Provider>
 ,document.getElementById('root')
 );

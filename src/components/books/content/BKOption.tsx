@@ -2,39 +2,46 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Store } from '../../../store';
 import {
-  withStyles,
-  createStyles,
-  WithStyles,
   Grid,
   Typography,
-  Theme,
   Button
 } from '@material-ui/core';
 import { InputAction } from '../../../types/BaseTypes';
 import { LocalStorage } from '../../../types/LocalStorage';
 import { DisplayMode, BKConstant as CONST } from '../common/BKConstant';
-
-const styles = (theme: Theme) => createStyles({
+import { makeStyles } from '@material-ui/core/styles';
+const useStyles = makeStyles(theme => ({
   root: {
   },
   button: {
     margin: theme.spacing(0.5),
   },
-});
+}));
 
-interface Props extends WithStyles<typeof styles> {
-  classes: any,
+interface ReduxProps {
+  /**
+   * redux store: locaStorage
+   */
   localStorage: LocalStorage,
+  /**
+   * redux action: save item to localStorage
+   */
   saveLocalStorage: (payload: InputAction) => void,
+}
+
+interface RawProps {
+}
+
+interface Props extends RawProps, ReduxProps {
 }
 
 interface State {
 }
 
 /**
- * Write the description of this component here
+ * Book option component
  */
-export const BKOption = withStyles(styles)(connect(
+export const BKOption: React.FC<RawProps> = connect(
   (store: Store) => ({
     localStorage: store.localStorage,
   }),
@@ -48,7 +55,6 @@ export const BKOption = withStyles(styles)(connect(
     };
   }
   static defaultProps = {
-    classes: {},
   };
 
   async componentDidMount() {
@@ -60,8 +66,11 @@ export const BKOption = withStyles(styles)(connect(
   }
 
   render() {
-    const { classes, localStorage } = this.props;
-    // const {} = this.state;
+    return <this.functionalRender />
+  }
+  functionalRender: React.FC = () => {
+    const classes = useStyles();
+    const { localStorage } = this.props;
     return (
       <Grid container spacing={4}>
         <Grid item xs={6}>
@@ -90,4 +99,4 @@ export const BKOption = withStyles(styles)(connect(
       </Grid>
     )
   }
-}));
+});

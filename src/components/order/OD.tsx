@@ -3,16 +3,20 @@ import { connect } from 'react-redux';
 import { Store } from '../../store';
 import { InputAction } from '../../types/BaseTypes';
 import { LocalStorage } from '../../types/LocalStorage';
-import { withStyles, createStyles, WithStyles } from '@material-ui/core';
+// import { makeStyles } from '@material-ui/core/styles';
+// const useStyles = makeStyles(theme => ({
+//   root: {
+//   },
+// }));
 
-const styles = () => createStyles({
-  root: {
-  }
-});
-
-interface Props extends WithStyles<typeof styles> {
-  classes: any,
+interface Props {
+  /**
+   * Props description
+   */
   localStorage: LocalStorage,
+  /**
+   * Props description
+   */
   saveLocalStorage: (payload: InputAction) => void,
 }
 
@@ -20,9 +24,9 @@ interface State {
 }
 
 /**
- * Write the description of this component here
+ * Component description
  */
-export const OD = withStyles(styles)(connect(
+export const OD: React.FC<Props> = connect(
   (store: Store) => ({
     localStorage: store.localStorage,
   }),
@@ -36,17 +40,20 @@ export const OD = withStyles(styles)(connect(
     };
   }
   static defaultProps = {
-    classes: {},
   };
 
   async componentDidMount() {
   }
 
   render() {
+    return <this.functionalRender />
+  }
+  functionalRender: React.FC = () => {
+    // const classes = useStyles();
     // const {} = this.props;
     // const {} = this.state;
     return (
       <></>
     )
   }
-}));
+});

@@ -2,9 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Store } from '../../../store';
 import {
-  withStyles,
-  createStyles,
-  WithStyles,
   Grid,
   Typography,
   Fab
@@ -16,13 +13,14 @@ import { CMSelection, CMSelectionUnit } from '../../common/CMSelection';
 import { BKConstant as CONST } from '../common/BKConstant';
 import { BookInfoRes } from '../../../types/api/GetBookInfo';
 import { BKService as Service } from '../common/BKService';
+import { makeStyles } from '@material-ui/core/styles';
 
-const styles = () => createStyles({
+const useStyles = makeStyles(theme => ({
   root: {
   },
   tags: {
   }
-});
+}));
 
 type TagUnit = {
   name: string;
@@ -30,20 +28,34 @@ type TagUnit = {
   isbn: string;
 }
 
-interface Props extends WithStyles<typeof styles> {
-  classes: any,
+interface ReduxProps {
+  /**
+   * redux store: main books list
+   */
   bookInfo: BookInfoRes,
+  /**
+   * redux store: locaStorage
+   */
   localStorage: LocalStorage,
+  /**
+   * redux action: save item to localStorage
+   */
   saveLocalStorage: (payload: InputAction) => void,
+}
+
+interface RawProps {
+}
+
+interface Props extends RawProps, ReduxProps {
 }
 
 interface State {
 }
 
 /**
- * Write the description of this component here
+ * Book condition component
  */
-export const BKCondition = withStyles(styles)(connect(
+export const BKCondition: React.FC<RawProps> = connect(
   (store: Store) => ({
     bookInfo: store.bookInfo,
     localStorage: store.localStorage,
@@ -58,7 +70,6 @@ export const BKCondition = withStyles(styles)(connect(
     };
   }
   static defaultProps = {
-    classes: {},
   };
 
   async componentDidMount() {
@@ -94,9 +105,12 @@ export const BKCondition = withStyles(styles)(connect(
     this.props.saveLocalStorage(payload);
   }
 
-
   render() {
-    const { classes, localStorage } = this.props;
+    return <this.functionalRender />
+  }
+  functionalRender: React.FC = () => {
+    const classes = useStyles();
+    const { localStorage } = this.props;
     const optionList: Array<CMSelectionUnit> = CONST.FILTER_SUBMAP.map(x => ({label: x.value, value: x.attr}));
     const typeList: Array<CMSelectionUnit> = CONST.OPTION_MODE_MAP.map(x => ({label: x.value, value: x.attr}));
 
@@ -155,4 +169,4 @@ export const BKCondition = withStyles(styles)(connect(
       </Grid>
     )
   }
-}));
+});

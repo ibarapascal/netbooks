@@ -1,24 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Store } from '../../../store';
-import { withStyles, createStyles, WithStyles } from '@material-ui/core';
+// import { makeStyles } from '@material-ui/core/styles';
+// const useStyles = makeStyles(theme => ({
+//   root: {
+//   }
+// }));
 
-const styles = () => createStyles({
-  root: {
-  }
-});
-
-interface Props extends WithStyles<typeof styles> {
-  classes: any,
+interface Props {
 }
 
 interface State {
 }
 
 /**
- * Write the description of this component here
+ * Common header component
  */
-export const CMGridHeader = withStyles(styles)(connect(
+export const CMGridHeader: React.FC<Props> = connect(
   (store: Store) => ({
   }),
   (dispatch: any) => ({
@@ -30,13 +28,15 @@ export const CMGridHeader = withStyles(styles)(connect(
     };
   }
   static defaultProps = {
-    classes: {},
   };
 
   async componentDidMount() {
   }
-
   render() {
+    return <this.functionalRender />
+  }
+  functionalRender: React.FC = () => {
+    // const classes = useStyles();
     // const {} = this.props;
     // const {} = this.state;
     return (
@@ -45,4 +45,4 @@ export const CMGridHeader = withStyles(styles)(connect(
       </>
     )
   }
-}));
+});

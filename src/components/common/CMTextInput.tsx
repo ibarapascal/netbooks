@@ -1,18 +1,37 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Store } from '../../store';
-import { withStyles, createStyles, WithStyles, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
+// import { makeStyles } from '@material-ui/core/styles';
+// const useStyles = makeStyles(theme => ({
+//   root: {
+//   },
+// }));
 
-const styles = () => createStyles({
-});
-
-interface Props extends WithStyles<typeof styles> {
-  classes: any,
+interface Props {
+  /**
+   * I/O element id
+   */
   id?: string,
+  /**
+   * input value
+   */
   value: string | number,
+  /**
+   * input event
+   */
   onChange: Function,
+  /**
+   * field label
+   */
   label?: string,
+  /**
+   * placeholder
+   */
   placeholder?: string,
+  /**
+   * other native props of TextField
+   */
   customProps?: any,
 }
 
@@ -20,9 +39,9 @@ interface State {
 }
 
 /**
- * Write the description of this component here
+ * Common text input component based on Material-UI
  */
-export const CMTextInput = withStyles(styles)(connect(
+export const CMTextInput: React.FC<Props> = connect(
   (store: Store) => ({
   }),
   (dispatch: any) => ({
@@ -34,10 +53,13 @@ export const CMTextInput = withStyles(styles)(connect(
     };
   }
   static defaultProps = {
-    classes: {},
   };
 
   render() {
+    return <this.functionalRender />
+  }
+  functionalRender: React.FC = () => {
+    // const classes = useStyles();
     const {
       id,
       value,
@@ -65,4 +87,4 @@ export const CMTextInput = withStyles(styles)(connect(
       />
     )
   }
-}));
+});

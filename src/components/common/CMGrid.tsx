@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Store } from '../../store';
-import { withStyles, createStyles, WithStyles, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { CMGridHeader } from './CMGridContent/CMGridHeader';
 import { CMGridSidebar } from './CMGridContent/CMGridSidebar';
 import { CMGridFooter } from './CMGridContent/CMGridFooter';
-
-const styles = () => createStyles({
+import { makeStyles } from '@material-ui/core/styles';
+const useStyles = makeStyles(theme => ({
   root: {
   },
   header: {
@@ -17,10 +17,12 @@ const styles = () => createStyles({
     bottom: 0,
     right: 0,
   }
-});
+}));
 
-interface Props extends WithStyles<typeof styles> {
-  classes: any,
+interface Props {
+  /**
+   * Main page content zone
+   */
   children: React.ReactNode,
 }
 
@@ -28,9 +30,9 @@ interface State {
 }
 
 /**
- * Write the description of this component here
+ * Common component used for rendering header, footer and sidebar
  */
-export const CMGrid = withStyles(styles)(connect(
+export const CMGrid: React.FC<Props> = connect(
   (store: Store) => ({
   }),
   (dispatch: any) => ({
@@ -42,15 +44,17 @@ export const CMGrid = withStyles(styles)(connect(
     };
   }
   static defaultProps = {
-    classes: {},
   };
 
   async componentDidMount() {
   }
 
   render() {
-    const { classes, children } = this.props;
-    // const {} = this.state;
+    return <this.functionalRender />
+  }
+  functionalRender: React.FC = () => {
+    const classes = useStyles();
+    const { children } = this.props;
     return (
       <>
         <Grid container>
@@ -72,4 +76,4 @@ export const CMGrid = withStyles(styles)(connect(
       </>
     )
   }
-}));
+});
