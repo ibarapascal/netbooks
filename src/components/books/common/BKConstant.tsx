@@ -1,11 +1,16 @@
+import React from "react";
 import { ProcessService } from "../../../services/ProcessService";
+import ViewCompactIcon from '@material-ui/icons/ViewCompact';
+import ViewComfyIcon from '@material-ui/icons/ViewComfy';
+import ViewHeadlineIcon from '@material-ui/icons/ViewHeadline';
+
 
 export class BKConstant {
 
   static readonly DISPLAY_MODE_MAP = [
-    {id: '1', attr: 'BigCard', value: 4},
-    {id: '2', attr: 'SmallCard', value: 2},
-    {id: '3', attr: 'List', value: 12}
+    {id: '1', attr: 'BigCard', value: 'Large', icon: <ViewCompactIcon />},
+    {id: '2', attr: 'SmallCard', value: 'Small', icon: <ViewComfyIcon />},
+    {id: '3', attr: 'List', value: 'List', icon: <ViewHeadlineIcon />}
   ] as const;
 
   static readonly OPTION_MODE_MAP = [
@@ -39,13 +44,26 @@ export class BKConstant {
     BKConstant.DATA_MAP,
     BKConstant.FILTER_ATTR_LIST
   );
+
+  static readonly SORT_ATTR_LIST = [
+    'title',
+    'isbn',
+    'publishedDate',
+  ] as const;
+  static readonly SORT_SUBMAP = ProcessService.obtainSubList(
+    BKConstant.DATA_MAP,
+    BKConstant.SORT_ATTR_LIST
+  );
 }
 
 const displayModeList = BKConstant.DISPLAY_MODE_MAP.map(x => x.attr);
 export type DisplayMode = typeof displayModeList[number];
 
+const filterTypeAttrList = BKConstant.OPTION_MODE_MAP.map(x => x.attr);
+export type FilterType = typeof filterTypeAttrList[number];
+
 const filterNameAttrList = BKConstant.FILTER_SUBMAP.map(x => x.attr);
 export type FilterAttr = typeof filterNameAttrList[number];
 
-const filterTypeAttrList = BKConstant.OPTION_MODE_MAP.map(x => x.attr);
-export type FilterType = typeof filterTypeAttrList[number];
+const sortNameAttrList = BKConstant.SORT_SUBMAP.map(x => x.attr);
+export type SortAttr = typeof sortNameAttrList[number];

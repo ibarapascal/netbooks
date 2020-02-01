@@ -24,10 +24,8 @@ import {
 import { InputAction } from '../../../types/BaseTypes';
 import { LocalStorage } from '../../../types/LocalStorage';
 import { BookInfoRes, BookUnit } from '../../../types/api/GetBookInfo';
-import { ProcessService } from '../../../services/ProcessService';
 import AddIcon from '@material-ui/icons/Add';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
-import { BKConstant as CONST } from '../common/BKConstant';
 import { BKService as Service } from '../common/BKService';
 
 const styles = (theme: Theme) => createStyles({
@@ -103,6 +101,7 @@ export const BKItems = withStyles(styles)(connect(
 
     const displayBook = Service.acquireFinalBooks(this.props).slice(0, pageSize);;
     
+    // TODO: re-rendered during shift between `Card` and `List`, use hidden to avoid
     if (displayMode !== 'List') {
       return (
         <Grid container>
@@ -125,12 +124,11 @@ export const BKItems = withStyles(styles)(connect(
   Card = (book: BookUnit) => {
     const { classes } = this.props;
     const { displayMode } = this.props.localStorage;
-    const gridWidth = ProcessService.acquireAttrValue(CONST.DISPLAY_MODE_MAP, displayMode);
     const url = book.thumbnailUrl ?? 'https://via.placeholder.com/300';
     return (
       <Grid
         item
-        xs={gridWidth}
+        xs={displayMode === 'BigCard' ? 4 : 2}
         key={book.isbn}
         className={classes.cardUnit}
       >

@@ -54,7 +54,7 @@ export const BK = withStyles(styles)(connect(
   render() {
     return (
       <CMGrid>
-        <Grid container>
+        <Grid container spacing={4}>
           <Grid item xs={12}>
             <BKCondition />
           </Grid>

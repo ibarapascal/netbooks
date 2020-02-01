@@ -66,3 +66,11 @@ Refer to react-debounce-render [repo](https://github.com/podefr/react-debounce-r
 Currently they do not have typescript support refer to this [issue](https://github.com/podefr/react-debounce-render/issues/14)  
 
 Plan to published a typescript version of it later.  
+
+### Performance
+
+During shift between `Card` and `List`, thumbnails requested multiple times.  
+
+Can be solved by hide rather than re-rendering.  
+
+As for large set of picture, we can use page to seperate, and use front-end local cache to make optimization.  

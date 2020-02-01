@@ -22,7 +22,7 @@ export class LocalStorage {
     this.filterOption = 'title';
     this.filterType = 'Normal';
     this.pageSize = 30;
-    this.displayMode = 'BigCard';
+    this.displayMode = 'SmallCard';
     this.tagList = Array<string>();
     this.selectedIdList = Array<string>();
   }
