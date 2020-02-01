@@ -56,3 +56,5 @@ longDescription?: string;
 ```
 
 Since we want to use `isbn` as the unique index, we decide not to display the data which does not have `isbn` number.  
+
+Addition: isbn also duplicated, remove them till the only one left.  

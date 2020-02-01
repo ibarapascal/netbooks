@@ -1,16 +1,61 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Store } from '../../../store';
-import { withStyles, createStyles, WithStyles, Grid } from '@material-ui/core';
+import {
+  withStyles,
+  createStyles,
+  WithStyles,
+  Grid,
+  Card,
+  CardActionArea,
+  CardMedia,
+  CardContent,
+  Typography,
+  CardActions,
+  ListItem,
+  ListItemText, 
+  Theme,
+  List,
+  ListItemAvatar,
+  Avatar,
+  ListItemSecondaryAction,
+  IconButton
+} from '@material-ui/core';
 import { InputAction } from '../../../types/BaseTypes';
 import { LocalStorage } from '../../../types/LocalStorage';
 import { BookInfoRes, BookUnit } from '../../../types/api/GetBookInfo';
 import { BKConstant as CONST } from '../common/BKConstant';
 import { ProcessService } from '../../../services/ProcessService';
+import AddIcon from '@material-ui/icons/Add';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 
-const styles = () => createStyles({
+const styles = (theme: Theme) => createStyles({
   root: {
-  }
+  },
+  cardUnit: {
+  },
+  card: {
+    maxWidth: 345,
+  },
+  cardActionArea: {
+    height: 600,
+  },
+  media: {
+    height: 300,
+  },
+  cardDescription: {
+    height: 200,
+    overflow: 'hidden',
+  },
+  list: {
+    width: '100%',
+    backgroundColor: theme.palette.background.paper,
+  },
+  listUnit: {
+  },
+  inline: {
+    display: 'inline',
+  },
 });
 
 interface Props extends WithStyles<typeof styles> {
@@ -47,39 +92,118 @@ export const BKItems = withStyles(styles)(connect(
   async componentDidMount() {
   }
 
-  render() {
-    const { bookInfo } = this.props;
-    const {
-      displayMode,
-      pageSize
-    } = this.props.localStorage;
-    const gridWidth = ProcessService.acquireAttrValue(CONST.DISPLAY_MODE_MAP, displayMode);
+  handleOpen = (isbn: string) => () => {
+    console.log(isbn);
+  }
 
+  render() {
+    const { classes, bookInfo } = this.props;
+    const { displayMode, pageSize } = this.props.localStorage;
     const displayBook = bookInfo.slice(0, pageSize);
+
+    if (displayMode !== 'List') {
+      return (
+        <Grid container>
+          {displayBook.map(book => {return (
+            this.Card(book)
+          )})}
+        </Grid>
+      )
+    } else {
+      return (
+        <List className={classes.list}>
+          {displayBook.map(book => {return (
+            this.List(book)
+          )})}
+        </List>
+      )
+    }
+  }
+
+  Card = (book: BookUnit) => {
+    const { classes } = this.props;
+    const { displayMode } = this.props.localStorage;
+    const gridWidth = ProcessService.acquireAttrValue(CONST.DISPLAY_MODE_MAP, displayMode);
+    const url = book.thumbnailUrl ?? 'https://via.placeholder.com/300';
     return (
-      <Grid container>
-        {displayBook.map(book => {return (
-          <Grid item xs={gridWidth}>
-            {displayMode !== 'List' ? <>
-              {this.Card(book)}
-            </> : <>
-              {this.List(book)}
-            </>}
-          </Grid>
-        )})}
+      <Grid
+        item
+        xs={gridWidth}
+        key={book.isbn}
+        className={classes.cardUnit}
+      >
+        <Card className={classes.card}>
+          <CardActionArea
+            className={classes.cardActionArea}
+            onClick={this.handleOpen(book.isbn ?? '')}
+          >
+            <CardMedia
+              className={classes.media}
+              image={url}
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                {book.title}
+              </Typography>
+              <Typography gutterBottom variant="subtitle1" component="h2">
+                {book.authors}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p" className={classes.cardDescription}>
+                {book.shortDescription ?? 'No specific description.'}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions>
+            <IconButton edge="end" aria-label="comments">
+              <AddIcon />
+            </IconButton>
+            <IconButton edge="end" aria-label="comments">
+              <FormatListBulletedIcon />
+            </IconButton>
+          </CardActions>
+        </Card>
       </Grid>
     )
   }
 
-  Card = (book: BookUnit) => {
-    return (
-      <>{book.isbn}</>
-    )
-  }
-
   List = (book: BookUnit) => {
+    const { classes } = this.props;
+    const url = book.thumbnailUrl ?? 'https://via.placeholder.com/300';
     return (
-      <>{book.isbn}</>
+      <ListItem
+        alignItems="flex-start"
+        key={book.isbn}
+        className={classes.listUnit}
+        onClick={this.handleOpen(book.isbn ?? '')}
+      >
+        <ListItemAvatar>
+          <Avatar alt="Remy Sharp" src={url} />
+        </ListItemAvatar>
+        <ListItemText
+          primary={book.title}
+          secondary={
+            <>
+              <Typography
+                component="span"
+                variant="body2"
+                className={classes.inline}
+                color="textPrimary"
+              >
+                {book.authors}
+              </Typography>
+              {` — ${book.categories}`}
+            </>
+          }
+        />
+        <ListItemSecondaryAction>
+          <IconButton edge="end" aria-label="comments">
+            <AddIcon />
+          </IconButton>
+          <IconButton edge="end" aria-label="comments">
+            <FormatListBulletedIcon />
+          </IconButton>
+        </ListItemSecondaryAction>
+      </ListItem>
     )
   }
 

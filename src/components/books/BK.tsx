@@ -43,12 +43,15 @@ export const BK = withStyles(styles)(connect(
   };
 
   async componentDidMount() {
-    await this.props.saveBookInfo(data.filter(x => x.isbn));
+    const savedData = data
+      // Remove which don't have `isbn`
+      .filter(x => x.isbn)
+      // Remove which have duplicated `isbn`
+      .filter((y, idx, self) => idx === self.findIndex(z => z.isbn === y.isbn));
+    await this.props.saveBookInfo(savedData);
   }
 
   render() {
-    // const {} = this.props;
-    // const {} = this.state;
     return (
       <CMGrid>
         <Grid container>
