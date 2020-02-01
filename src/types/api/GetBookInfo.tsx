@@ -4,7 +4,7 @@ export class BookInfoReq {
 export class BookInfoRes extends Array<BookUnit>{
 }
 
-class BookUnit {
+export class BookUnit {
   title: string;
   isbn?: string;
   pageCount: number;
@@ -24,7 +24,7 @@ class BookUnit {
   }
 }
 
-class PublishedDate {
+export class PublishedDate {
   $date: string;
   constructor() {
     this.$date = '';

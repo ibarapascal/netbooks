@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Store } from '../store';
-import { InputAction } from '../types/BaseTypes';
-import { LocalStorage } from '../types/LocalStorage';
+import { Store } from '../../../store';
 import { withStyles, createStyles, WithStyles } from '@material-ui/core';
+import { InputAction } from '../../../types/BaseTypes';
+import { LocalStorage } from '../../../types/LocalStorage';
 
 const styles = () => createStyles({
   root: {
@@ -22,7 +22,7 @@ interface State {
 /**
  * Write the description of this component here
  */
-export const YourComponentName = withStyles(styles)(connect(
+export const BKCondition = withStyles(styles)(connect(
   (store: Store) => ({
     localStorage: store.localStorage,
   }),
@@ -46,7 +46,9 @@ export const YourComponentName = withStyles(styles)(connect(
     // const {} = this.props;
     // const {} = this.state;
     return (
-      <></>
+      <>
+        <div>BKCondition</div>
+      </>
     )
   }
 }));

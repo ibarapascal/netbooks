@@ -1,17 +1,17 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
-import { Storage } from './types/Storage';
+import { LocalStorage } from './types/LocalStorage';
 import { BookInfoRes } from './types/api/GetBookInfo';
 import { Store } from './store';
 
-const StorageReducer = createReducer<Store['storage']>(
-  new Storage(),
+const LocalStorageReducer = createReducer<Store['localStorage']>(
+  new LocalStorage(),
   {
-    saveStorageItem(state: Storage, action: any) {
+    saveLocalStorageItem(state: LocalStorage, action: any) {
       return state = {...state, [action.payload.item]: action.payload.value};
     },
-    clearStorage(state: Storage) {
-      return state = new Storage();
+    clearLocalStorage(state: LocalStorage) {
+      return state = new LocalStorage();
     },
   }
 );
@@ -26,6 +26,6 @@ const BookInfoReducer = createReducer<Store['bookInfo']>(
 );
 
 export const reducer = combineReducers({
-  storage: StorageReducer,
+  localStorage: LocalStorageReducer,
   bookInfo: BookInfoReducer,
 });

@@ -5,7 +5,7 @@ import './Home.css';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { InputAction } from '../types/BaseTypes';
-import { Storage } from '../types/Storage';
+import { LocalStorage } from '../types/LocalStorage';
 import { data } from '../data'
 import { BookInfoRes } from '../types/api/GetBookInfo';
 
@@ -29,11 +29,11 @@ interface Props {
   /**
    * localStorage storage
    */
-  storage: Storage,
+  localStorage: LocalStorage,
   /**
    * action: save storage
    */
-  saveStorage: (payload: InputAction) => void,
+  saveLocalStorage: (payload: InputAction) => void,
   /**
    * action: save static data to redux storage
    */
@@ -48,10 +48,10 @@ interface State {
  */
 export const Home: React.FC<Props> = connect(
   (store: Store) => ({
-    storage: store.storage,
+    localStorage: store.localStorage,
   }),
   (dispatch: any) => ({
-    saveStorage: (payload: InputAction) => dispatch({type: 'saveStorageItem', payload}),
+    saveLocalStorage: (payload: InputAction) => dispatch({type: 'saveLocalStorageItem', payload}),
     saveBookInfo: (payload: BookInfoRes) => dispatch({type: 'saveBookInfo', payload}),
   })
 )(class extends React.Component<Props, State>{

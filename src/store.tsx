@@ -1,7 +1,7 @@
-import { Storage } from './types/Storage';
+import { LocalStorage } from './types/LocalStorage';
 import { BookInfoRes } from './types/api/GetBookInfo';
 
 export interface Store {
-  storage: Storage;
+  localStorage: LocalStorage;
   bookInfo: BookInfoRes;
 }

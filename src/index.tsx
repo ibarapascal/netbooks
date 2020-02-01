@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { Home }  from './components/Home';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from '@reduxjs/toolkit';
@@ -9,6 +8,7 @@ import { reducer } from './reducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BK } from './components/books/BK';
 
 const preloadStore = {
 };
@@ -25,7 +25,7 @@ ReactDOM.render(
 <Provider store={store}>
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={Home} />
+      <Route exact path="/" component={BK} />
       <Redirect to="/" />
     </Switch>
   </BrowserRouter>
