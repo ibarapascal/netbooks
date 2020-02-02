@@ -10,6 +10,7 @@ import thunk from 'redux-thunk';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { BK } from './components/books/BK';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core';
+import { DT } from './components/detail/DT';
 
 const theme = createMuiTheme({
 });
@@ -31,6 +32,8 @@ ReactDOM.render(
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={BK} />
+        <Route exact path="/books" component={BK} />
+        <Route path="/details/" component={DT} />
         <Redirect to="/" />
       </Switch>
     </BrowserRouter>

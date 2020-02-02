@@ -31,6 +31,9 @@ export class BKConstant {
     {id: '10', attr: 'categories', value: 'Category'},
   ] as const;
 
+  /**
+   * Books filter options attributes
+   */
   static readonly FILTER_ATTR_LIST = [
     'title',
     'authors',
@@ -43,7 +46,9 @@ export class BKConstant {
     BKConstant.DATA_MAP,
     BKConstant.FILTER_ATTR_LIST
   );
-
+  /**
+   * Books sort options attributes
+   */
   static readonly SORT_ATTR_LIST = [
     'title',
     'pageCount',
@@ -51,6 +56,34 @@ export class BKConstant {
   static readonly SORT_SUBMAP = ProcessService.obtainSubList(
     BKConstant.DATA_MAP,
     BKConstant.SORT_ATTR_LIST
+  );
+  /**
+   * OnMouseOver display info attributes
+   */
+  static readonly TOOLTIP_ATTR_LIST = [
+    'title',
+    'isbn',
+    'pageCount',
+    'publishedDate',
+    'status',
+    'authors',
+    'categories',
+  ] as const;
+  static readonly TOOLTIP_SUBMAP = ProcessService.obtainSubList(
+    BKConstant.DATA_MAP,
+    BKConstant.TOOLTIP_ATTR_LIST
+  );
+  /**
+   * Debounce display details info attributes
+   */
+  static readonly DETAIL_ATTR_LIST = [
+    'title',
+    'shortDescription',
+    'longDescription',
+  ] as const;
+  static readonly DETAILS_SUBMAP = ProcessService.obtainSubList(
+    BKConstant.DATA_MAP,
+    BKConstant.DETAIL_ATTR_LIST
   );
 }
 
@@ -60,8 +93,17 @@ export type DisplayMode = typeof displayModeList[number];
 const filterTypeAttrList = BKConstant.OPTION_MODE_MAP.map(x => x.attr);
 export type FilterType = typeof filterTypeAttrList[number];
 
+const dataAttrList = BKConstant.DATA_MAP.map(x => x.attr);
+export type DataAttr = typeof dataAttrList[number];
+
 const filterNameAttrList = BKConstant.FILTER_ATTR_LIST;
 export type FilterAttr = typeof filterNameAttrList[number];
 
 const sortNameAttrList = BKConstant.SORT_ATTR_LIST;
 export type SortAttr = typeof sortNameAttrList[number];
+
+const tooltipAttrList = BKConstant.TOOLTIP_ATTR_LIST;
+export type TooltipAttr = typeof tooltipAttrList[number];
+
+const detailsAttrList = BKConstant.DETAIL_ATTR_LIST;
+export type DetailsAttr = typeof detailsAttrList[number];

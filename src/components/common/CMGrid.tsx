@@ -6,16 +6,20 @@ import { CMGridHeader } from './CMGridContent/CMGridHeader';
 import { CMGridSidebar } from './CMGridContent/CMGridSidebar';
 import { CMGridFooter } from './CMGridContent/CMGridFooter';
 import { makeStyles } from '@material-ui/core/styles';
+import { CMGridInfo } from './CMGridContent/CMGridInfo';
 const useStyles = makeStyles(theme => ({
   root: {
   },
   header: {
   },
   footer: {
-    position: 'absolute',
-    left: 0,
-    bottom: 0,
-    right: 0,
+    // position: 'absolute',
+    // left: 0,
+    // bottom: 0,
+    // right: 0,
+  },
+  mainContent: {
+    minHeight: 1000,
   }
 }));
 
@@ -64,10 +68,11 @@ export const CMGrid: React.FC<Props> = connect(
           <Grid item xs={3}>
             <CMGridSidebar />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={6} className={classes.mainContent}>
             {children}
           </Grid>
           <Grid item xs={3}>
+            <CMGridInfo />
           </Grid>
           <Grid item xs={12} className={classes.footer}>
             <CMGridFooter />

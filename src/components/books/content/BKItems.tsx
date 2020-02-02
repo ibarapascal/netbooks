@@ -15,7 +15,8 @@ import {
   ListItemAvatar,
   Avatar,
   ListItemSecondaryAction,
-  IconButton
+  IconButton,
+  Tooltip
 } from '@material-ui/core';
 import { InputAction } from '../../../types/BaseTypes';
 import { LocalStorage } from '../../../types/LocalStorage';
@@ -24,24 +25,25 @@ import AddIcon from '@material-ui/icons/Add';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import { BKService as Service } from '../common/BKService';
 import { makeStyles } from '@material-ui/core/styles';
+import { debounce } from 'lodash';
+import { BKConstant as CONST } from '../common/BKConstant';
+import { CMSelectionUnit } from '../../common/CMSelection';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
   },
-  cardUnit: {
+  cardRoot: {
   },
-  card: {
-    maxWidth: 345,
+  cardUnit: {
+    height: '100%',
+    maxWidth: 350,
   },
   cardActionArea: {
-    height: 600,
+    height: 500,
   },
   media: {
-    height: 300,
-  },
-  cardDescription: {
-    height: 200,
-    overflow: 'hidden',
+    height: 350,
   },
   list: {
     width: '100%',
@@ -101,9 +103,12 @@ export const BKItems: React.FC<RawProps> = connect(
   async componentDidMount() {
   }
 
-  handleOpen = (isbn: string) => () => {
-    console.log(isbn);
+  handleOnMouseOver = (isbn: string) => () => {
+    this.debounceEvent(isbn);
   }
+  debounceEvent = debounce((value: string) => {
+    console.log(value);
+  }, 500);
 
   render() {
     return <this.functionalRender />
@@ -112,7 +117,7 @@ export const BKItems: React.FC<RawProps> = connect(
     const classes = useStyles();
     const { pageSize, displayMode } = this.props.localStorage;
     const displayBook = Service.acquireFinalBooks(this.props).slice(0, Number(pageSize));
-
+    const tooltipList: Array<CMSelectionUnit> = CONST.TOOLTIP_SUBMAP.map(x => ({label: x.value, value: x.attr}));
     // TODO: re-rendered during shift between `Card` and `List`, use hidden to avoid
     if (displayMode !== 'List') {
       return (
@@ -124,12 +129,28 @@ export const BKItems: React.FC<RawProps> = connect(
               item
               xs={displayMode === 'BigCard' ? 4 : 2}
               key={book.isbn}
-              className={classes.cardUnit}
+              className={classes.cardRoot}
             >
-              <Card className={classes.card}>
+              <Tooltip
+                placement="left"
+                TransitionProps={{timeout: 1000}}
+                title={
+                  <>
+                  {tooltipList.map(item => {
+                    const showingValue = item.value === 'publishedDate'
+                      ? new Date((book as any)[item.value]?.$date ?? '')
+                      : (book as any)[item.value];
+                    return (
+                    <Typography gutterBottom variant="subtitle1" component="h2" key={item.value}>
+                      {item.label + ': ' + showingValue}
+                    </Typography>
+                  )})}
+                  </>
+              }>
+              <Card className={classes.cardUnit}>
                 <CardActionArea
                   className={classes.cardActionArea}
-                  onClick={this.handleOpen(book.isbn ?? '')}
+                  onMouseOver={this.handleOnMouseOver(book.isbn ?? '')}
                 >
                   <CardMedia
                     className={classes.media}
@@ -142,20 +163,27 @@ export const BKItems: React.FC<RawProps> = connect(
                     <Typography gutterBottom variant="subtitle1" component="h2">
                       {book.authors}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p" className={classes.cardDescription}>
-                      {book.shortDescription ?? 'No specific description.'}
-                    </Typography>
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <IconButton edge="end" aria-label="comments">
-                    <AddIcon />
-                  </IconButton>
-                  <IconButton edge="end" aria-label="comments">
-                    <FormatListBulletedIcon />
-                  </IconButton>
+                  <Tooltip title="Add to order" aria-label="add" placement="top">
+                    <IconButton edge="end" aria-label="comments">
+                      <AddIcon />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Details" aria-label="add" placement="top">
+                    <IconButton
+                      edge="end"
+                      aria-label="comments"
+                      component={Link}
+                      to={`/details/${book.isbn ?? ''}`}
+                    >
+                      <FormatListBulletedIcon />
+                    </IconButton>
+                  </Tooltip>
                 </CardActions>
               </Card>
+              </Tooltip>
             </Grid>
           )})}
         </Grid>
@@ -170,7 +198,6 @@ export const BKItems: React.FC<RawProps> = connect(
               alignItems="flex-start"
               className={classes.listUnit}
               key={book.isbn}
-              onClick={this.handleOpen(book.isbn ?? '')}
             >
               <ListItemAvatar>
                 <Avatar alt="Remy Sharp" src={url} />
@@ -192,12 +219,21 @@ export const BKItems: React.FC<RawProps> = connect(
                 }
               />
               <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="comments">
-                  <AddIcon />
-                </IconButton>
-                <IconButton edge="end" aria-label="comments">
-                  <FormatListBulletedIcon />
-                </IconButton>
+                <Tooltip title="Add to order" aria-label="add">
+                  <IconButton edge="end" aria-label="comments">
+                    <AddIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Details" aria-label="add">
+                  <IconButton
+                    edge="end"
+                    aria-label="comments"
+                    component={Link}
+                    to={`/details/${book.isbn ?? ''}`}
+                  >
+                    <FormatListBulletedIcon />
+                  </IconButton>
+                </Tooltip>
               </ListItemSecondaryAction>
             </ListItem>
           )})}
