@@ -46,8 +46,7 @@ export class BKConstant {
 
   static readonly SORT_ATTR_LIST = [
     'title',
-    'isbn',
-    'publishedDate',
+    'pageCount',
   ] as const;
   static readonly SORT_SUBMAP = ProcessService.obtainSubList(
     BKConstant.DATA_MAP,
@@ -61,8 +60,8 @@ export type DisplayMode = typeof displayModeList[number];
 const filterTypeAttrList = BKConstant.OPTION_MODE_MAP.map(x => x.attr);
 export type FilterType = typeof filterTypeAttrList[number];
 
-const filterNameAttrList = BKConstant.FILTER_SUBMAP.map(x => x.attr);
+const filterNameAttrList = BKConstant.FILTER_ATTR_LIST;
 export type FilterAttr = typeof filterNameAttrList[number];
 
-const sortNameAttrList = BKConstant.SORT_SUBMAP.map(x => x.attr);
+const sortNameAttrList = BKConstant.SORT_ATTR_LIST;
 export type SortAttr = typeof sortNameAttrList[number];

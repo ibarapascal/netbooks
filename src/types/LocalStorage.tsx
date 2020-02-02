@@ -1,4 +1,4 @@
-import { DisplayMode, FilterType, FilterAttr } from "../components/books/common/BKConstant";
+import { DisplayMode, FilterType, FilterAttr, SortAttr } from "../components/books/common/BKConstant";
 
 export class LocalStorage {
   /***
@@ -10,8 +10,9 @@ export class LocalStorage {
   /**
    * Option
    */
-  pageSize: number;
+  pageSize: string;
   displayMode: DisplayMode;
+  sortMode: SortAttr;
   /**
    * Storage
    */
@@ -21,8 +22,9 @@ export class LocalStorage {
     this.filterInput = '';
     this.filterOption = 'title';
     this.filterType = 'Normal';
-    this.pageSize = 30;
+    this.pageSize = '20';
     this.displayMode = 'SmallCard';
+    this.sortMode = 'title';
     this.tagList = Array<string>();
     this.selectedIdList = Array<string>();
   }

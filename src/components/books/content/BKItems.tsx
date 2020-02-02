@@ -111,7 +111,7 @@ export const BKItems: React.FC<RawProps> = connect(
   functionalRender: React.FC = () => {
     const classes = useStyles();
     const { pageSize, displayMode } = this.props.localStorage;
-    const displayBook = Service.acquireFinalBooks(this.props).slice(0, pageSize);
+    const displayBook = Service.acquireFinalBooks(this.props).slice(0, Number(pageSize));
 
     // TODO: re-rendered during shift between `Card` and `List`, use hidden to avoid
     if (displayMode !== 'List') {

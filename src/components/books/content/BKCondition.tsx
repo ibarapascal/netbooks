@@ -19,6 +19,9 @@ const useStyles = makeStyles(theme => ({
   root: {
   },
   tags: {
+    margin: 3,
+    height: 42,
+    textTransform: 'none',
   }
 }));
 
@@ -118,7 +121,7 @@ export const BKCondition: React.FC<RawProps> = connect(
   
     return (
       <Grid container spacing={4}>
-        <Grid item xs={6}>
+        <Grid item xs={8}>
           <Typography gutterBottom variant="h5" component="h2">
             Input
           </Typography>
@@ -131,7 +134,7 @@ export const BKCondition: React.FC<RawProps> = connect(
             }}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <Typography gutterBottom variant="h5" component="h2">
             Filter
           </Typography>
@@ -142,7 +145,7 @@ export const BKCondition: React.FC<RawProps> = connect(
             onChange={this.handleSelectFilter('filterOption')}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <Typography gutterBottom variant="h5" component="h2">
             Option
           </Typography>

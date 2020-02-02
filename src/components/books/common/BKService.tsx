@@ -39,6 +39,7 @@ export class BKService {
    */
   static acquireRawBooks(props: DisplayProps): Array<BookUnit> {
     const { filterInput, filterOption, filterType } = props.localStorage;
+    // Input filter
     return props.bookInfo.filter(x => this.checkIfMatch(x[filterOption], filterInput, filterType));
   }
   /**
@@ -46,8 +47,12 @@ export class BKService {
    * @param props 
    */
   static acquireFinalBooks(props: DisplayProps): Array<BookUnit> {
-    const { tagList } = props.localStorage;
-    return BKService.acquireRawBooks(props).filter(x => tagList.length === 0 || x?.categories.some(y => tagList.includes(y)));
+    const { tagList, sortMode } = props.localStorage;
+    // Select tag
+    const result = BKService.acquireRawBooks(props).filter(x => tagList.length === 0 || x?.categories.some(y => tagList.includes(y)));
+    // Sort content
+    result.sort((a, b) => (a as any)[sortMode].toString().localeCompare((b as any)[sortMode].toString()))
+    return result;
   }
 }
 
