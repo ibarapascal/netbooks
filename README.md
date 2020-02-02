@@ -4,6 +4,8 @@ React + Typescript
 
 period: 2020/01/31 - 2020/02/02 (3 days)  
 
+![main view](https://github.com/ibarapascal/netbooks/blob/master/src/temp/screenshot-main-view-20200202162746.jpg)
+
 ## 1. How to run this  
 
 1.1. Serve pages  [http://localhost:3000/books](http://localhost:3000/books)
@@ -54,9 +56,13 @@ Create a simple Bookstore web app: [data source](https://raw.githubusercontent.c
 
 ## 3. What we can show
 
-File dependencies visualization at 2020/02/02 16:20
+File dependencies visualization at 2020/02/02 16:20  
 
 ![2020/02/02 16:20](https://github.com/ibarapascal/netbooks/blob/master/src/temp/vision-view-components.svg)
+
+Automatic generated document at 2020/02/02 16:30  
+
+![2020/02/02 16:30](https://github.com/ibarapascal/netbooks/blob/master/src/temp/screenshot-document-20200202162832.jpg)
 
 ## 4. Dev notes  
 
