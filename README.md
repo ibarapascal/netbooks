@@ -1,6 +1,6 @@
 # netbooks - demo
 
-React + Typescript
+React + Typescript + Redux + Material-UI + ESLint + Styleguidist
 
 period: 2020/01/31 - 2020/02/02 (3 days)  
 
@@ -54,13 +54,13 @@ Create a simple Bookstore web app: [data source](https://raw.githubusercontent.c
 - Single source constant definition, type check for almost all attributes.  
 - Automatic generated document / file structure analysis.  
 
-## 3. What we can show
+## 3. What we can see
 
 File dependencies visualization at 2020/02/02 16:20  
 
 ![2020/02/02 16:20](https://github.com/ibarapascal/netbooks/blob/master/src/temp/vision-view-components.svg)
 
-Automatic generated document at 2020/02/02 16:30  
+Automatic generated hot-update document at 2020/02/02 16:30  
 
 ![2020/02/02 16:30](https://github.com/ibarapascal/netbooks/blob/master/src/temp/screenshot-document-20200202162832.jpg)
 
