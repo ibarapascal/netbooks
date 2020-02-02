@@ -37,11 +37,9 @@ export const CMGridInfo: React.FC<Props> = connect(
   }
   functionalRender: React.FC = () => {
     // const classes = useStyles();
-    // const {} = this.props;
-    // const {} = this.state;
     return (
       <>
-        <div>CMGridInfo</div>
+        <div></div>
       </>
     )
   }

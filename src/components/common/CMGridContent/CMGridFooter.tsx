@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Store } from '../../../store';
-// import { makeStyles } from '@material-ui/core/styles';
-// const useStyles = makeStyles(theme => ({
-//   root: {
-//   }
-// }));
+import { makeStyles } from '@material-ui/core/styles';
+const useStyles = makeStyles(theme => ({
+  root: {
+    marginTop: 10,
+  }
+}));
 
 interface Props {
 }
@@ -36,12 +37,10 @@ export const CMGridFooter: React.FC<Props> = connect(
     return <this.functionalRender />
   }
   functionalRender: React.FC = () => {
-    // const classes = useStyles();
-    // const {} = this.props;
-    // const {} = this.state;
+    const classes = useStyles();
     return (
       <>
-        <div>CMGridFooter</div>
+        <div className={classes.root}>Created by <a href='https://github.com/ibarapascal'>ibarapascal</a></div>
       </>
     )
   }

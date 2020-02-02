@@ -42,6 +42,9 @@ const useStyles = makeStyles(theme => ({
   cardActionArea: {
     height: 500,
   },
+  cardContent: {
+    height: '100%',
+  },
   media: {
     height: 350,
   },
@@ -156,7 +159,7 @@ export const BKItems: React.FC<RawProps> = connect(
                     className={classes.media}
                     image={url}
                   />
-                  <CardContent>
+                  <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
                       {book.title}
                     </Typography>

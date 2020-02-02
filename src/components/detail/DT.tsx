@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { URLService } from '../../services/URLService';
 import { BKConstant } from '../books/common/BKConstant';
 import { BookInfoRes } from '../../types/api/GetBookInfo';
+import ReactDOM from 'react-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -62,7 +63,13 @@ export const DT: React.FC<Props> = connect(
   };
 
   async componentDidMount() {
+    const dom = ReactDOM.findDOMNode(this)
+    if (dom instanceof Element) {
+      // Back to top when mount
+      dom.scrollIntoView();
+    }
   }
+
   acquireId(): string | undefined {
     const { history } = this.props;
     if (URLService.acquireCurrentPageDomain(history) === 'details') {

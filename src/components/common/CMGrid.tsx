@@ -13,13 +13,16 @@ const useStyles = makeStyles(theme => ({
   header: {
   },
   footer: {
-    // position: 'absolute',
-    // left: 0,
-    // bottom: 0,
-    // right: 0,
+    position: 'fixed',
+    bottom: 0,
+    width: '100%',
+    height: 60,
+    textAlign: 'center',
+    backgroundColor: '#D0D0D0',
   },
   mainContent: {
     minHeight: 1000,
+    marginTop: 20,
   }
 }));
 

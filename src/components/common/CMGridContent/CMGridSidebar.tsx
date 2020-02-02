@@ -37,11 +37,9 @@ export const CMGridSidebar: React.FC<Props> = connect(
   }
   functionalRender: React.FC = () => {
     // const classes = useStyles();
-    // const {} = this.props;
-    // const {} = this.state;
     return (
       <>
-        <div>CMGridSidebar</div>
+        <div></div>
       </>
     )
   }
