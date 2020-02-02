@@ -16,14 +16,14 @@ yarn install
 yarn start
 ```
 
-1.2. File dependencies visualization by `arkit`  
+1.2. File dependencies visualization by [arkit](https://github.com/dyatko/arkit)  
 
 ```shell
 yarn arkit src/ -o src/temp/vision-all-files.svg
 yarn arkit src/ -o src/temp/vision-view-components.svg -e "src/reducer.tsx,src/store.tsx,src/types/BaseTypes.tsx,src/types/LocalStorage.tsx"
 ```
 
-1.3. File history visualization by `gource`  
+1.3. File history visualization by [gource](https://github.com/acaudwell/Gource)  
 
 ```shell
 gource --seconds-per-day 10 -1920x1080 --auto-skip-seconds 0.5
@@ -63,6 +63,10 @@ File dependencies visualization at 2020/02/02 16:20
 Automatic generated hot-update document at 2020/02/02 16:30  
 
 ![2020/02/02 16:30](https://github.com/ibarapascal/netbooks/blob/master/src/temp/screenshot-document-20200202162832.jpg)
+
+File structure and commit history visualization at 2020/02/02 17:30  
+
+![2020/02/02 17:30](https://github.com/ibarapascal/netbooks/blob/master/src/temp/screenshot-files-20200202172311.jpg)
 
 ## 4. Dev notes  
 
