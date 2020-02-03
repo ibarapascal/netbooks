@@ -68,7 +68,15 @@ File structure and commit history visualization at 2020/02/02 17:30
 
 ![2020/02/02 17:30](https://github.com/ibarapascal/netbooks/blob/master/src/temp/screenshot-files-20200202172311.jpg)
 
-## 4. Dev notes  
+## 4. Bug list (2020/02/03)  
+
+1. Responsive setting not perfect (implemented under 4k resolution)  
+
+2. Card content over-flow below icon buttons  
+
+3. Card icon buttons coverd by footer  
+
+## 5. Dev notes  
 
 ### Ways to bind styles in react classic / functional components  
 
