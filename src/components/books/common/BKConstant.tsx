@@ -1,8 +1,10 @@
-import React from "react";
-import { ProcessService } from "../../../services/ProcessService";
-import ViewCompactIcon from '@material-ui/icons/ViewCompact';
+import React from 'react';
+
 import ViewComfyIcon from '@material-ui/icons/ViewComfy';
+import ViewCompactIcon from '@material-ui/icons/ViewCompact';
 import ViewHeadlineIcon from '@material-ui/icons/ViewHeadline';
+
+import { ProcessService } from '../../../services/ProcessService';
 
 export class BKConstant {
 

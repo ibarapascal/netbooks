@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import { Store } from '../store';
 import { InputAction } from '../types/BaseTypes';
 import { LocalStorage } from '../types/LocalStorage';
+
 // import { makeStyles } from '@material-ui/core/styles';
 // const useStyles = makeStyles(theme => ({
 //   root: {
@@ -34,13 +36,13 @@ export const YourComponentName: React.FC<Props> = connect(
     saveLocalStorage: (payload: InputAction) => dispatch({type: 'saveLocalStorageItem', payload}),
   })
 )(class extends React.Component<Props, State>{
+  static defaultProps = {
+  };
   constructor(props: Props) {
     super(props);
     this.state = {
     };
   }
-  static defaultProps = {
-  };
 
   async componentDidMount() {
   }
@@ -53,7 +55,7 @@ export const YourComponentName: React.FC<Props> = connect(
     // const {} = this.props;
     // const {} = this.state;
     return (
-      <></>
+      null
     )
   }
 });

@@ -1,9 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
+import {
+  createStyles,
+  withStyles,
+  WithStyles
+} from '@material-ui/core';
+
 import { Store } from '../store';
 import { InputAction } from '../types/BaseTypes';
 import { LocalStorage } from '../types/LocalStorage';
-import { withStyles, createStyles, WithStyles } from '@material-ui/core';
 
 const styles = () => createStyles({
   root: {
@@ -30,14 +36,14 @@ export const YourComponentName = withStyles(styles)(connect(
     saveLocalStorage: (payload: InputAction) => dispatch({type: 'saveLocalStorageItem', payload}),
   })
 )(class extends React.Component<Props, State>{
+  static defaultProps = {
+    classes: {},
+  };
   constructor(props: Props) {
     super(props);
     this.state = {
     };
   }
-  static defaultProps = {
-    classes: {},
-  };
 
   async componentDidMount() {
   }
@@ -46,7 +52,7 @@ export const YourComponentName = withStyles(styles)(connect(
     // const {} = this.props;
     // const {} = this.state;
     return (
-      <></>
+      null
     )
   }
 }));

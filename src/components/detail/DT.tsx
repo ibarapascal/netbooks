@@ -1,17 +1,23 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import { Store } from '../../store';
-import { InputAction } from '../../types/BaseTypes';
-import { LocalStorage } from '../../types/LocalStorage';
-import { CMGrid } from '../common/CMGrid';
-import { Grid, Button, Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+
+import {
+  Button,
+  Grid,
+  Typography
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { Link } from 'react-router-dom';
+
 import { URLService } from '../../services/URLService';
-import { BKConstant } from '../books/common/BKConstant';
+import { Store } from '../../store';
 import { BookInfoRes } from '../../types/api/GetBookInfo';
-import ReactDOM from 'react-dom';
+import { InputAction } from '../../types/BaseTypes';
+import { LocalStorage } from '../../types/LocalStorage';
+import { BKConstant } from '../books/common/BKConstant';
+import { CMGrid } from '../common/CMGrid';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -54,15 +60,17 @@ export const DT: React.FC<Props> = connect(
     saveLocalStorage: (payload: InputAction) => dispatch({type: 'saveLocalStorageItem', payload}),
   })
 )(class extends React.Component<Props, State>{
+  static defaultProps = {
+  };
   constructor(props: Props) {
     super(props);
     this.state = {
     };
   }
-  static defaultProps = {
-  };
+
 
   async componentDidMount() {
+    // eslint-disable-next-line react/no-find-dom-node
     const dom = ReactDOM.findDOMNode(this)
     if (dom instanceof Element) {
       // Back to top when mount
@@ -91,12 +99,12 @@ export const DT: React.FC<Props> = connect(
           <Grid item xs={12}>
             <Button
               variant="contained"
-              color={'default'}
+              color="default"
               size="large"
               className={classes.button}
               startIcon={<ArrowBackIcon />}
               component={Link}
-              to={`/books`}
+              to="/books"
             >
               Back
             </Button>

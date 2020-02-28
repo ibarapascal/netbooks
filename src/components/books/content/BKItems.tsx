@@ -1,34 +1,36 @@
+import { debounce } from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Store } from '../../../store';
+import { Link } from 'react-router-dom';
+
 import {
-  Grid,
+  Avatar,
   Card,
   CardActionArea,
-  CardMedia,
-  CardContent,
-  Typography,
   CardActions,
-  ListItem,
-  ListItemText, 
-  List,
-  ListItemAvatar,
-  Avatar,
-  ListItemSecondaryAction,
+  CardContent,
+  CardMedia,
+  Grid,
   IconButton,
-  Tooltip
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemSecondaryAction,
+  ListItemText,
+  Tooltip,
+  Typography
 } from '@material-ui/core';
-import { InputAction } from '../../../types/BaseTypes';
-import { LocalStorage } from '../../../types/LocalStorage';
-import { BookInfoRes } from '../../../types/api/GetBookInfo';
+import { makeStyles } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/Add';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
-import { BKService as Service } from '../common/BKService';
-import { makeStyles } from '@material-ui/core/styles';
-import { debounce } from 'lodash';
-import { BKConstant as CONST } from '../common/BKConstant';
+
+import { Store } from '../../../store';
+import { BookInfoRes } from '../../../types/api/GetBookInfo';
+import { InputAction } from '../../../types/BaseTypes';
+import { LocalStorage } from '../../../types/LocalStorage';
 import { CMSelectionUnit } from '../../common/CMSelection';
-import { Link } from 'react-router-dom';
+import { BKConstant as CONST } from '../common/BKConstant';
+import { BKService as Service } from '../common/BKService';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -95,13 +97,13 @@ export const BKItems: React.FC<RawProps> = connect(
     saveLocalStorage: (payload: InputAction) => dispatch({type: 'saveLocalStorageItem', payload}),
   })
 )(class extends React.Component<Props, State>{
+  static defaultProps = {
+  };
   constructor(props: Props) {
     super(props);
     this.state = {
     };
   }
-  static defaultProps = {
-  };
 
   async componentDidMount() {
   }
@@ -109,6 +111,7 @@ export const BKItems: React.FC<RawProps> = connect(
   handleOnMouseOver = (isbn: string) => () => {
     this.debounceEvent(isbn);
   }
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   debounceEvent = debounce((value: string) => {
     console.log(value);
   }, 500);
@@ -138,8 +141,7 @@ export const BKItems: React.FC<RawProps> = connect(
                 placement="left"
                 TransitionProps={{timeout: 1000}}
                 title={
-                  <>
-                  {tooltipList.map(item => {
+                  tooltipList.map(item => {
                     const showingValue = item.value === 'publishedDate'
                       ? new Date((book as any)[item.value]?.$date ?? '')
                       : (book as any)[item.value];
@@ -147,8 +149,7 @@ export const BKItems: React.FC<RawProps> = connect(
                     <Typography gutterBottom variant="subtitle1" component="h2" key={item.value}>
                       {item.label + ': ' + showingValue}
                     </Typography>
-                  )})}
-                  </>
+                  )})
               }>
               <Card className={classes.cardUnit}>
                 <CardActionArea

@@ -1,13 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Store } from '../../store';
-import { CMGrid } from '../common/CMGrid';
-import { BookInfoRes } from '../../types/api/GetBookInfo';
-import { data } from '../../data'
+
 import { Grid } from '@material-ui/core';
+
+import { data } from '../../data';
+import { Store } from '../../store';
+import { BookInfoRes } from '../../types/api/GetBookInfo';
+import { CMGrid } from '../common/CMGrid';
 import { BKCondition } from './content/BKCondition';
-import { BKOption } from './content/BKOption';
 import { BKItems } from './content/BKItems';
+import { BKOption } from './content/BKOption';
 
 // import { makeStyles } from '@material-ui/core/styles';
 // const useStyles = makeStyles(theme => ({
@@ -35,13 +37,13 @@ export const BK: React.FC<Props> = connect(
     saveBookInfo: (payload: BookInfoRes) => dispatch({type: 'saveBookInfo', payload}),
   })
 )(class extends React.Component<Props, State>{
+  static defaultProps = {
+  };
   constructor(props: Props) {
     super(props);
     this.state = {
     };
   }
-  static defaultProps = {
-  };
 
   async componentDidMount() {
     const savedData = data

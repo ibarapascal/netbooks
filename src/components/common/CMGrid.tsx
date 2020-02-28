@@ -1,12 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Store } from '../../store';
+
 import { Grid } from '@material-ui/core';
-import { CMGridHeader } from './CMGridContent/CMGridHeader';
-import { CMGridSidebar } from './CMGridContent/CMGridSidebar';
-import { CMGridFooter } from './CMGridContent/CMGridFooter';
 import { makeStyles } from '@material-ui/core/styles';
+
+import { Store } from '../../store';
+import { CMGridFooter } from './CMGridContent/CMGridFooter';
+import { CMGridHeader } from './CMGridContent/CMGridHeader';
 import { CMGridInfo } from './CMGridContent/CMGridInfo';
+import { CMGridSidebar } from './CMGridContent/CMGridSidebar';
+
 const useStyles = makeStyles(theme => ({
   root: {
   },
@@ -45,13 +48,13 @@ export const CMGrid: React.FC<Props> = connect(
   (dispatch: any) => ({
   })
 )(class extends React.Component<Props, State>{
+  static defaultProps = {
+  };
   constructor(props: Props) {
     super(props);
     this.state = {
     };
   }
-  static defaultProps = {
-  };
 
   async componentDidMount() {
   }
@@ -63,8 +66,7 @@ export const CMGrid: React.FC<Props> = connect(
     const classes = useStyles();
     const { children } = this.props;
     return (
-      <>
-        <Grid container>
+      <Grid container>
           <Grid item xs={12} className={classes.header}>
             <CMGridHeader />
           </Grid>
@@ -81,7 +83,6 @@ export const CMGrid: React.FC<Props> = connect(
             <CMGridFooter />
           </Grid>
         </Grid>
-      </>
     )
   }
 });

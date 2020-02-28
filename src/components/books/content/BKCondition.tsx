@@ -1,19 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Store } from '../../../store';
+
 import {
+  Fab,
   Grid,
-  Typography,
-  Fab
+  Typography
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+import { Store } from '../../../store';
+import { BookInfoRes } from '../../../types/api/GetBookInfo';
 import { InputAction } from '../../../types/BaseTypes';
 import { LocalStorage } from '../../../types/LocalStorage';
+import {
+  CMSelection,
+  CMSelectionUnit
+} from '../../common/CMSelection';
 import { CMTextInput } from '../../common/CMTextInput';
-import { CMSelection, CMSelectionUnit } from '../../common/CMSelection';
 import { BKConstant as CONST } from '../common/BKConstant';
-import { BookInfoRes } from '../../../types/api/GetBookInfo';
 import { BKService as Service } from '../common/BKService';
-import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-type TagUnit = {
+interface TagUnit {
   name: string;
   amount: number;
   isbn: string;
@@ -67,13 +72,13 @@ export const BKCondition: React.FC<RawProps> = connect(
     saveLocalStorage: (payload: InputAction) => dispatch({type: 'saveLocalStorageItem', payload}),
   })
 )(class extends React.Component<Props, State>{
+  static defaultProps = {
+  };
   constructor(props: Props) {
     super(props);
     this.state = {
     };
   }
-  static defaultProps = {
-  };
 
   async componentDidMount() {
   }

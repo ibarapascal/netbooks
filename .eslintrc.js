@@ -57,5 +57,8 @@ module.exports = {
    "@typescript-eslint/explicit-member-accessibility": "off",
    "@typescript-eslint/no-empty-interface": "off",
    "no-array-constructor": "off",
+   "@typescript-eslint/no-non-null-asserted-optional-chain": "error",
+   "react/jsx-key": 0, // if you have some prevalent situation where you use arrow functions to return JSX that will not be held in an iterable, you may want to disable this rule.
+   "no-return-assign": 0,
   }
 };

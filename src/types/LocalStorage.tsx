@@ -1,4 +1,9 @@
-import { DisplayMode, FilterType, FilterAttr, SortAttr } from "../components/books/common/BKConstant";
+import {
+  DisplayMode,
+  FilterAttr,
+  FilterType,
+  SortAttr
+} from '../components/books/common/BKConstant';
 
 export class LocalStorage {
   /***

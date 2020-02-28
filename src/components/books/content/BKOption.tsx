@@ -1,16 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Store } from '../../../store';
+
 import {
+  Button,
   Grid,
-  Typography,
-  Button
+  Typography
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+import { Store } from '../../../store';
 import { InputAction } from '../../../types/BaseTypes';
 import { LocalStorage } from '../../../types/LocalStorage';
-import { DisplayMode, BKConstant as CONST } from '../common/BKConstant';
-import { makeStyles } from '@material-ui/core/styles';
-import { CMSelection, CMSelectionUnit } from '../../common/CMSelection';
+import {
+  CMSelection,
+  CMSelectionUnit
+} from '../../common/CMSelection';
+import {
+  BKConstant as CONST,
+  DisplayMode
+} from '../common/BKConstant';
+
 const useStyles = makeStyles(theme => ({
   root: {
   },
@@ -50,13 +59,13 @@ export const BKOption: React.FC<RawProps> = connect(
     saveLocalStorage: (payload: InputAction) => dispatch({type: 'saveLocalStorageItem', payload}),
   })
 )(class extends React.Component<Props, State>{
+  static defaultProps = {
+  };
   constructor(props: Props) {
     super(props);
     this.state = {
     };
   }
-  static defaultProps = {
-  };
 
   async componentDidMount() {
   }

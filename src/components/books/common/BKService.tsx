@@ -1,6 +1,6 @@
-import { FilterType } from "./BKConstant";
-import { BookUnit } from "../../../types/api/GetBookInfo";
-import { Store } from "../../../store";
+import { Store } from '../../../store';
+import { BookUnit } from '../../../types/api/GetBookInfo';
+import { FilterType } from './BKConstant';
 
 export class BKService {
   /**
