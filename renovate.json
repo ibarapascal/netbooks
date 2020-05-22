@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "schedule": "before 5am every weekday",
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": "after 10pm on sunday"
+  },
+  "packageRules": [
+    {
+      "packagePatterns": [ "eslint" ],
+      "groupName": "eslint",
+      "schedule": ["before 5am every weekday"],
+      "automerge": true,
+      "automergeType": "branch"
+    }
+  ]
+}
