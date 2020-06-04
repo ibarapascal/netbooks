@@ -44,7 +44,7 @@
     "prettier": "1.19.1",
     "react-docgen-typescript": "1.16.5",
     "react-styleguidist": "11.0.8",
-    "typescript": "3.9.3"
+    "typescript": "3.9.5"
   },
   "scripts": {
     "document": "styleguidist server",
