@@ -42,7 +42,7 @@
     "eslint-plugin-react": "7.20.0",
     "gource": "0.0.0",
     "prettier": "1.19.1",
-    "react-docgen-typescript": "1.17.1",
+    "react-docgen-typescript": "1.18.0",
     "react-styleguidist": "11.0.8",
     "typescript": "3.9.5"
   },
